@@ -1,34 +1,48 @@
+// Copyright 2015 <Matvey Kalistratov>
 #pragma once
-#include <string.h>
-#include <stdio.h>
-#include <iostream>
 #include "Employee.h"
-using namespace std;
+#include <stdio.h>
+#include <string>
+#include <iostream>
+#include <list>
+using std::list;
+using std::cout;
+using std::cin;
+using std::ostream;
+using std::endl;
+using std::exception;
+using std::string;
 
-class Department 
-{
-private:
-    string depname;  //Название отдела
-	int employees;  //Количество сотрудников в нем
-	double summsalary;  //Суммарная зарплата всех сотрудников за день
-	bool coffeemachine;  //Наличие в отделе автомата с кофе  
-public:
-	Department();
-	~Department();
+class Department {
+ private:
+    string depname;  // Department name
+    list <Employee> employees;  // Number of employees there
+    double summsalary;  // Summ salary of the employee
+    bool coffeemachine;  // Availability of the coffeemachine there
 
-	void setDepName(string );
-	void setEmployees(int );
-	void setCoffeeMachine(bool );
-	void addDepartment();
+ public:
+    Department();
+    ~Department();
+    Department(const Department& copy);
 
-	void changeDepartment();
+    void remove(int number);
+    void remove(const Employee& emp);
+    void add(const Employee& number);
+    bool has(const Employee& emp);
+    void setDepName(const string& depname);
+    const string getDepName();
+    void setEmployees(list <Employee>);
+    list <Employee> getEmployees();
+    void setCoffeeMachine(const bool& coffeemachine);
+    const bool getCoffeeMachine();
+    void addDepartment(const string& depname, const bool coffeemachine);
 
-	double countSummSalary();
+    void changeDepartment();
+    void printEmployees();
 
-	void printDepartment();
+    void printDepartment();
 
-	Department& operator=(const Department&);
-
-
-
+    Department& operator=(const Department& right);
+    bool operator==(const Department& right);
+    const Employee& operator[](int i) const;
 };
